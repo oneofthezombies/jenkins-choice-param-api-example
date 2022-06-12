@@ -1,0 +1,22 @@
+@Library('my_library') _
+import org.oneofthezombies.utility.ParameterUtil
+
+properties([
+    parameters([
+        new ParameterUtil(this).createAPIChoiceParam(
+            path:'projects',
+            name:'PROJECT',
+            description:'select project')
+    ])
+])
+
+pipeline {
+    agent { label('master') }
+    stages {
+        stage('test') {
+            steps {
+                echo(params.PROJECT)
+            }
+        }
+    }
+}
